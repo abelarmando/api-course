@@ -1,0 +1,28 @@
+{
+  "name": "backend_course_video_belajar",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abelarmando/api-course.git"
+  },
+  "author": "abel armando",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abelarmando/api-course/issues"
+  },
+  "homepage": "https://github.com/abelarmando/api-course#readme",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mysql2": "^3.12.0",
+    "nodemon": "^3.1.9"
+  }
+}
