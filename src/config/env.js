@@ -7,4 +7,14 @@ config({
   path: envFile,
 });
 
-export const { PORT, DB_HOST, DB_USER, DB_DATABASE, DB_PASSWORD } = process.env;
+export const {
+  PORT,
+  DB_HOST,
+  DB_USER,
+  DB_DATABASE,
+  DB_PASSWORD,
+  ACCESS_TOKEN_SECRET,
+  REFRESH_TOKEN_SECRET,
+  ACCESS_TOKEN_EXPIRE,
+  REFRESH_TOKEN_EXPIRE,
+} = process.env;
