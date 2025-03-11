@@ -3,11 +3,13 @@ import {
   ACCESS_TOKEN_SECRET,
   REFRESH_TOKEN_SECRET,
   REFRESH_TOKEN_EXPIRE,
-  PORT,
+  SENDER_EMAIL,
 } from "../config/env.js";
 import { createNewUserdb, getUserdb } from "../models/auth.models.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+
+import { sendVerification } from "../mailer/sendverification.js";
 
 export const handleRegistrasi = async (req, res) => {
   const { nama, no_handphone, email, password } = req.body;
@@ -24,6 +26,8 @@ export const handleRegistrasi = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(password, salt);
     await createNewUserdb(nama, no_handphone, email, passwordHash);
+
+    await sendVerification(nama, no_handphone, email);
 
     res.status(200).json({
       success: true,
