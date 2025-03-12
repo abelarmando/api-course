@@ -1,9 +1,9 @@
 import dbpool from "../config/database.js";
 const date = new Date().toLocaleDateString("en-CA");
 
-export const createNewUserdb = (nama, no_handphone, email, password) => {
+export const createNewUserdb = (nama, no_handphone, email, password, token) => {
   const user = dbpool.query(
-    `INSERT INTO users (nama, no_handphone, hash_password, email, tanggal_pembuatan, tanggal_update) VALUES ("${nama}", ${no_handphone},  "${password}","${email}", "${date}", "${date}")`
+    `INSERT INTO users (nama, no_handphone, hash_password, email, token, expire_at ) VALUES ("${nama}", ${no_handphone},  "${password}","${email}", "${token}", now() + interval 2 hour )`
   );
   return user;
 };

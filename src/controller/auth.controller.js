@@ -3,19 +3,16 @@ import {
   ACCESS_TOKEN_SECRET,
   REFRESH_TOKEN_SECRET,
   REFRESH_TOKEN_EXPIRE,
-  SENDER_EMAIL,
 } from "../config/env.js";
 import { createNewUserdb, getUserdb } from "../models/auth.models.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import { sendVerification } from "../mailer/sendverification.js";
+import { encryptToken } from "../utility/encryptedtoken.js";
 
 export const handleRegistrasi = async (req, res) => {
   const { nama, no_handphone, email, password } = req.body;
-  if (!nama || !no_handphone || !email || !password) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
 
   try {
     const [existuser] = await getUserdb(email);
@@ -25,9 +22,10 @@ export const handleRegistrasi = async (req, res) => {
 
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(password, salt);
-    await createNewUserdb(nama, no_handphone, email, passwordHash);
-
-    await sendVerification(nama, no_handphone, email);
+    const encrypted = encryptToken(email);
+    await createNewUserdb(nama, no_handphone, email, passwordHash, encrypted);
+    let info = await sendVerification(nama, encrypted, email);
+    console.log(info.response);
 
     res.status(200).json({
       success: true,
