@@ -12,9 +12,9 @@ export const updateUserToken = (oldtoken, newtoken) => {
   return updatetoken;
 };
 
-export const updateVerifiedUser = (token) => {
+export const updateVerifiedUser = (email) => {
   const verifieduser = dbpool.query(
-    `UPDATE users SET token = null, expire_at = null WHERE token = "${token}"`
+    `UPDATE users SET token = null, expire_at = null WHERE email = "${email}"`
   );
   return verifieduser;
 };

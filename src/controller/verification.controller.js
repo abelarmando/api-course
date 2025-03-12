@@ -28,7 +28,7 @@ export const verification = async (req, res) => {
       });
     }
 
-    await updateVerifiedUser(token);
+    await updateVerifiedUser(user[0].email);
     res.status(200).json({ message: "user sudah terferifikasi" });
   } catch (error) {
     res.status(500).json({ message: error.message });
