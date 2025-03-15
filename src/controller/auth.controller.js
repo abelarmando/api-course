@@ -3,7 +3,7 @@ import {
   ACCESS_TOKEN_SECRET,
   REFRESH_TOKEN_SECRET,
   REFRESH_TOKEN_EXPIRE,
-} from "../config/env.js";
+} from "../mailer/config/env.js";
 import { createNewUserdb, getUserdb } from "../models/auth.models.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";

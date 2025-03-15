@@ -1,4 +1,4 @@
-import dbpool from "../config/database.js";
+import dbpool from "../mailer/config/database.js";
 
 export const getAllCoursesdb = () => {
   const rows = dbpool.query("SELECT * FROM course");

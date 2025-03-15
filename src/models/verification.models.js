@@ -1,4 +1,4 @@
-import dbpool from "../config/database.js";
+import dbpool from "../mailer/config/database.js";
 
 export const getUserbyToken = (token) => {
   const user = dbpool.query(`SELECT * FROM users WHERE token = "${token}" `);
@@ -7,7 +7,7 @@ export const getUserbyToken = (token) => {
 
 export const updateUserToken = (oldtoken, newtoken) => {
   const updatetoken = dbpool.query(
-    `UPDATE users SET token = "${newtoken}", expire_at = now() + interval 2 hour WHERE token = ${oldtoken}`
+    `UPDATE users SET token = "${newtoken}", expire_at = now() + interval 2 hour WHERE token = "${oldtoken}"`
   );
   return updatetoken;
 };

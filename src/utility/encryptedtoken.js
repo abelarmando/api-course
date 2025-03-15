@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { CRYPTO_KEY } from "../config/env.js";
+import { CRYPTO_KEY } from "../mailer/config/env.js";
 
 export const encryptToken = (no_handphone) => {
   return crypto

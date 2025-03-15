@@ -1,16 +1,24 @@
+import { PORT } from "./mailer/config/env.js";
 import express from "express";
 import courseRouter from "./routes/course.routes.js";
 import authRouter from "./routes/auth.routes.js";
-import { PORT } from "./config/env.js";
 import verificationRouter from "./routes/verification.routes.js";
+import { errorhandling } from "./middleware/error.middleware.js";
+import upload from "./middleware/multer.middleware.js";
+import uploadRouter from "./routes/uploud.routes.js";
 
 const app = express();
 
 app.use(express.json());
+app.use("/avatars", express.static("public/img"));
 
 app.use("/course", courseRouter);
 app.use("/auth", authRouter);
 app.use("/verifikasi", verificationRouter);
+
+app.use("/uploud", uploadRouter);
+
+app.use(errorhandling);
 
 app.listen(PORT, () => {
   console.log(`Server running on port http://localhost:${PORT}`);

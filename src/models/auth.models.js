@@ -1,4 +1,4 @@
-import dbpool from "../config/database.js";
+import dbpool from "../mailer/config/database.js";
 const date = new Date().toLocaleDateString("en-CA");
 
 export const createNewUserdb = (nama, no_handphone, email, password, token) => {
