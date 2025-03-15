@@ -17,26 +17,13 @@ export const verification = async (req, res) => {
     const expire_date = new Date(user[0].expire_at).getTime();
     const now_date = new Date().getTime();
 
-    if (0 < now_date) {
-      // const newtoken = encryptToken(user[0].email);
-      // await updateUserToken(token, newtoken);
-      // const mailer = await sendVerification(
-      //   user[0].nama,
-      //   user[0].email,
-      //   newtoken
-      // );
-      // console.log(mailer.response);
-      // return res.status(401).json({
-      //   message:
-      //     "kode verifikasi sudah melewati masa tenggat, mohon dicek email kembali",
-      // });
-      console.log("a");
+    if (expire_date < now_date) {
       const response = await repeatverification(token, user[0]);
-      console.log("respone", response);
+
       return res.status(response.status).json({ message: response.message });
     }
-    console.log("b");
-    // await updateVerifiedUser(user[0].email);
+
+    await updateVerifiedUser(user[0].email);
     res.status(200).json({ message: "user sudah terferifikasi" });
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -93,3 +93,8 @@ export const handleLogin = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const handleLogout = (req, res) => {
+  res.clearCookie("jwt", { httpOnly: true, secure: true, sameSite: "none" });
+  res.status(200).json({ success: true, message: "logout success" });
+};
