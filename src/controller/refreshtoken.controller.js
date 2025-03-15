@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { REFRESH_TOKEN_SECRET } from "../mailer/config/env.js";
+import { REFRESH_TOKEN_SECRET } from "../config/env.js";
 import { handleLogout } from "./auth.controller.js";
 
 export const handleRefreshToken = async (req, res) => {

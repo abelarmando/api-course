@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { ACCESS_TOKEN_SECRET } from "../mailer/config/env.js";
+import { ACCESS_TOKEN_SECRET } from "../config/env.js";
 
 export const verifyJWT = (req, res, next) => {
   try {

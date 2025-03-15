@@ -1,4 +1,4 @@
-import dbpool from "../mailer/config/database.js";
+import dbpool from "../config/database.js";
 
 export const getUserbyToken = (token) => {
   const user = dbpool.query(`SELECT * FROM users WHERE token = "${token}" `);

@@ -1,4 +1,4 @@
-import { PORT } from "./mailer/config/env.js";
+import { PORT } from "./config/env.js";
 import express from "express";
 import courseRouter from "./routes/course.routes.js";
 import authRouter from "./routes/auth.routes.js";

@@ -4,7 +4,7 @@ import {
   getAllCoursesdb,
   getCourseByIddb,
   updateCoursedb,
-} from "../models/course.models.js";
+} from "../models/courses.models.js";
 
 export const getAllCourses = async (req, res) => {
   try {

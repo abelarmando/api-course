@@ -1,5 +1,5 @@
-import transporter from "./config/nodemailjer.js";
-import { SENDER_EMAIL } from "./config/env.js";
+import transporter from "../../config/nodemailjer.js";
+import { SENDER_EMAIL } from "../../config/env.js";
 
 export const sendVerification = async (nama, token, email) => {
   const mailOptions = {

@@ -3,12 +3,12 @@ import {
   ACCESS_TOKEN_SECRET,
   REFRESH_TOKEN_SECRET,
   REFRESH_TOKEN_EXPIRE,
-} from "../mailer/config/env.js";
+} from "../config/env.js";
 import { createNewUserdb, getUserdb } from "../models/auth.models.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import { sendVerification } from "../mailer/sendverification.js";
+import { sendVerification } from "../utility/mailer/sendverification.js";
 import { encryptToken } from "../utility/encryptedtoken.js";
 
 export const handleRegistrasi = async (req, res) => {

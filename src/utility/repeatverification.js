@@ -1,4 +1,4 @@
-import { sendVerification } from "../mailer/sendverification.js";
+import { sendVerification } from "./mailer/sendverification.js";
 import { updateUserToken } from "../models/verification.models.js";
 import { encryptToken } from "./encryptedtoken.js";
 
