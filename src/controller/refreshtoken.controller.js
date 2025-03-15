@@ -14,6 +14,6 @@ export const handleRefreshToken = async (req, res) => {
       ACCESS_TOKEN_SECRET,
       { expiresIn: ACCESS_TOKEN_EXPIRE }
     );
-    res.json({ accessToken: accessToken, email: decoded.email });
+    res.status(200).json({ accessToken: accessToken, email: decoded.email });
   });
 };
