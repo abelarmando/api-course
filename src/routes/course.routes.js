@@ -11,9 +11,9 @@ import { verifyJWT } from "../middleware/verivyJWT.middleware.js";
 const courseRouter = Router();
 
 courseRouter.get("/", getAllCourses);
-courseRouter.post("/", createCourse);
+courseRouter.post("/", verifyJWT, createCourse);
 courseRouter.get("/:id", getCourseById);
-courseRouter.patch("/:id", updatecourse);
+courseRouter.patch("/:id", verifyJWT, updatecourse);
 courseRouter.delete("/:id", verifyJWT, deleteCourse);
 
 export default courseRouter;
