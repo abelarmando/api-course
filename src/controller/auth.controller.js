@@ -10,12 +10,20 @@ import jwt from "jsonwebtoken";
 
 import { sendVerification } from "../utility/mailer/sendverification.js";
 import { encryptToken } from "../utility/encryptedtoken.js";
+import { repeatverification } from "../utility/repeatverification.js";
 
 export const handleRegistrasi = async (req, res) => {
   const { nama, no_handphone, email, password } = req.body;
 
   try {
     const [existuser] = await getUserdb(email);
+    if (existuser[0].token !== null) {
+      const response = await repeatverification(
+        existuser[0].token,
+        existuser[0]
+      );
+      return res.status(response.status).json({ message: response.message });
+    }
     if (existuser.length > 0) {
       return res.status(400).json({ message: "user already exist" });
     }
