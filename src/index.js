@@ -15,7 +15,7 @@ app.use(cookieParser());
 
 app.use("/course", courseRouter);
 app.use("/auth", authRouter);
-app.use("/verifikasi", verificationRouter);
+app.use("/verify-email", verificationRouter);
 app.use("/refreshtoken", refreshtokenRouter);
 app.use("/uploud", uploadRouter);
 
