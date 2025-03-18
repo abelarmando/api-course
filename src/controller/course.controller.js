@@ -4,11 +4,28 @@ import {
   getAllCoursesdb,
   getCourseByIddb,
   updateCoursedb,
+  topicCoursedb,
+  sortbyCoursedb,
+  searchCoursedb,
 } from "../models/courses.models.js";
 
 export const getAllCourses = async (req, res) => {
+  const { topic, sortby, search } = req.query;
+
   try {
-    const [courses] = await getAllCoursesdb();
+    let courses;
+    if (!topic && !sortby && !search) {
+      [courses] = await getAllCoursesdb();
+    }
+    if (topic) {
+      [courses] = await topicCoursedb(topic);
+    }
+    if (sortby) {
+      [courses] = await sortbyCoursedb(sortby);
+    }
+    if (search) {
+      [courses] = await searchCoursedb(search);
+    }
     res.status(200).json({ success: true, data: courses });
   } catch (error) {
     res.status(500).json({ message: error.message });

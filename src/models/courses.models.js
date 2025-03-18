@@ -30,3 +30,24 @@ export const deleteCoursedb = (id) => {
   );
   return deletecourse;
 };
+
+export const topicCoursedb = (topic) => {
+  const topiccourse = dbpool.query(
+    `SELECT * FROM courses WHERE judul LIKE '%${topic}%' OR deskripsi LIKE '${topic}';`
+  );
+  return topiccourse;
+};
+
+export const sortbyCoursedb = (sortby) => {
+  const sortbycourse = dbpool.query(
+    `SELECT * FROM courses ORDER BY harga ${sortby}`
+  );
+  return sortbycourse;
+};
+
+export const searchCoursedb = (search) => {
+  const searchcourse = dbpool.query(
+    `SELECT * FROM courses WHERE judul LIKE '%${search}%' `
+  );
+  return searchcourse;
+};
