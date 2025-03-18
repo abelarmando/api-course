@@ -6,7 +6,7 @@ export const handleRefreshToken = async (req, res) => {
   const cookies = req.cookies;
   if (!cookies?.jwt) return res.status(401);
   const refreshToken = cookies.jwt;
-  console.log(cookies);
+
   jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, (err, decoded) => {
     if (err) return handleLogout();
     const accessToken = jwt.sign(
