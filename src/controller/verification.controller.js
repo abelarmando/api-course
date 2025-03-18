@@ -12,7 +12,7 @@ export const verification = async (req, res) => {
   try {
     const [user] = await getUserbyToken(token);
     if (user.length == 0) {
-      return res.status(200).json({ message: "user sudah terverifikasi" });
+      return res.status(401).json({ message: "verifikasi gagal" });
     }
     const expire_date = new Date(user[0].expire_at).getTime();
     const now_date = new Date().getTime();
