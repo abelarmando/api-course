@@ -1,7 +1,7 @@
 import transporter from "../../config/nodemailjer.js";
 import { SENDER_EMAIL } from "../../config/env.js";
 
-export const sendVerification = async (nama, token, email) => {
+export const sendVerification = (nama, token, email) => {
   const mailOptions = {
     from: SENDER_EMAIL,
     to: email,
@@ -52,7 +52,7 @@ export const sendVerification = async (nama, token, email) => {
     <div class="container">
         <h2>Verifikasi Email Anda</h2>
         <p>Terima kasih telah mendaftar! Klik tombol di bawah untuk memverifikasi alamat email Anda.</p>
-        <a href="http://localhost:5500/verifikasi/${token}" class="button">Verifikasi Email</a>
+        <a href="http://localhost:5500/verify-email/${token}" class="button">Verifikasi Email</a>
         <p class="footer">Jika Anda tidak mendaftar di layanan kami, abaikan email ini.</p>
     </div>
 </body>

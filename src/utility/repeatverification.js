@@ -1,11 +1,10 @@
 import { sendVerification } from "./mailer/sendverification.js";
 import { updateUserToken } from "../models/verification.models.js";
-import { encryptToken } from "./encryptedtoken.js";
+import { v6 as uuidv6 } from "uuid";
 
 export const repeatverification = async (token, user) => {
   try {
-    console.log("user", user);
-    const newtoken = encryptToken(user.email);
+    const newtoken = uuidv6();
     await updateUserToken(token, newtoken);
     const mailer = await sendVerification(user.nama, newtoken, user.email);
     console.log(mailer.response);

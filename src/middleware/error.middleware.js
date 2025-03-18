@@ -3,7 +3,7 @@ import multer from "multer";
 export const errorhandling = (err, req, res, next) => {
   if (err instanceof multer.MulterError) {
     return res.status(400).json({
-      message: "file to large goblok sia",
+      message: "file to large",
     });
   }
 

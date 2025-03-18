@@ -7,7 +7,7 @@ import {
 
 const authRouter = Router();
 
-authRouter.post("/registrasi", handleRegistrasi);
+authRouter.post("/register", handleRegistrasi);
 authRouter.post("/login", handleLogin);
 authRouter.post("/logout", handleLogout);
 

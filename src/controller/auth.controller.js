@@ -7,7 +7,7 @@ import {
 import { createNewUserdb, getUserdb } from "../models/auth.models.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
+import { v6 as uuidv6 } from "uuid";
 import { sendVerification } from "../utility/mailer/sendverification.js";
 import { encryptToken } from "../utility/encryptedtoken.js";
 import { repeatverification } from "../utility/repeatverification.js";
@@ -17,22 +17,26 @@ export const handleRegistrasi = async (req, res) => {
 
   try {
     const [existuser] = await getUserdb(email);
-    if (existuser[0].token !== null) {
-      const response = await repeatverification(
-        existuser[0].token,
-        existuser[0]
-      );
-      return res.status(response.status).json({ message: response.message });
-    }
+
     if (existuser.length > 0) {
-      return res.status(400).json({ message: "user already exist" });
+      if (existuser[0].token !== null) {
+        const response = await repeatverification(
+          existuser[0].token,
+          existuser[0]
+        );
+        return res.status(response.status).json({
+          message: "email sudah terdaftar, verifikasi sudah terkirim kembali",
+        });
+      } else {
+        return res.status(400).json({ message: "user already exist" });
+      }
     }
 
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(password, salt);
-    const encrypted = encryptToken(email);
-    await createNewUserdb(nama, no_handphone, email, passwordHash, encrypted);
-    let info = await sendVerification(nama, encrypted, email);
+    const uuid = uuidv6();
+    await createNewUserdb(nama, no_handphone, email, passwordHash, uuid);
+    let info = await sendVerification(nama, uuid, email);
     console.log(info.response);
 
     res.status(200).json({
@@ -58,6 +62,10 @@ export const handleLogin = async (req, res) => {
       return res.status(404).json({ message: "user not found" });
     }
 
+    if (user[0].token !== null) {
+      const response = await repeatverification(user[0].token, user[0]);
+      return res.status(response.status).json({ message: response.message });
+    }
     const isValidPassword = await bcrypt.compare(
       password,
       user[0].hash_password
